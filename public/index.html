@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form id="task-form">
+            <input type="text" id="task-title" placeholder="Enter task title">
+            <button type="submit">Add Task</button>
+        </form>
+        <ul id="task-list"></ul>
+    </div>
+
+    <script>
+        const apiUrl = 'http://localhost:3000/api/tasks';
+
+        // Fetch tasks
+        async function fetchTasks() {
+            const res = await fetch(apiUrl);
+            const tasks = await res.json();
+            renderTasks(tasks);
+        }
+
+        // Render tasks
+        function renderTasks(tasks) {
+            const taskList = document.getElementById('task-list');
+            taskList.innerHTML = '';
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.textContent = `${task.title} - ${task.status}`;
+                taskList.appendChild(li);
+            });
+        }
+
+        // Add task event
+        document.getElementById('task-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('task-title').value;
+
+            const res = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title })
+            });
+
+            if (res.ok) {
+                const task = await res.json();
+                fetchTasks();
+            }
+        });
+
+        fetchTasks();
+    </script>
+</body>
+</html>

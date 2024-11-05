@@ -1,0 +1,24 @@
+{
+  "name": "teste-tecnco---node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "keywords": [],
+  "author": "Kaio",
+  "license": "ISC",
+  "description": "Projeto para apresentar",
+  "dependencies": {
+    "express": "^4.21.1",
+    "function-bind": "^1.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaioGhesa/Desafio-Node.JS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KaioGhesa/Desafio-Node.JS/issues"
+  },
+  "homepage": "https://github.com/KaioGhesa/Desafio-Node.JS#readme"
+}
